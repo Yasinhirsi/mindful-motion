@@ -55,7 +55,37 @@ Unlike typical fitness or mood-tracking apps, Mindful Motion:
 
 ## 📊 Sample Screenshots
 
-> _(Insert your favourite visuals from the report here: e.g. NLP check-in results, emotion detection camera interface, fitness dashboard, therapist portal view, ERD)_
+
+
+### 🧭 Dashboard Overview
+
+<img width="793" height="436" alt="Screenshot 2025-07-30 at 19 25 28" src="https://github.com/user-attachments/assets/55814aab-333e-4a45-80e9-2073691ce47d" />
+
+
+### 📝 Daily Check-In (Form)
+<img width="804" height="351" alt="Screenshot 2025-07-30 at 19 25 46" src="https://github.com/user-attachments/assets/ea58d043-8017-4fb4-a156-18873d982c1e" />
+
+
+### 📈 Emotion Analysis Result
+<img width="809" height="413" alt="Screenshot 2025-07-30 at 19 26 07" src="https://github.com/user-attachments/assets/4d954d8c-d1e4-461f-81a7-55eebe2b7bf0" />
+
+
+### 😐 Facial Expression Detection
+
+<img width="850" height="396" alt="Screenshot 2025-07-30 at 19 26 58" src="https://github.com/user-attachments/assets/72b16679-42f7-4955-8f71-dbb6c66c51d3" />
+
+### 👤 Therapist Insights View
+<img width="1026" height="478" alt="Screenshot 2025-07-30 at 19 28 08" src="https://github.com/user-attachments/assets/b1184808-d849-4d12-b380-ea412679d3ce" />
+
+
+### 🏃 Fitness Progress Tracking
+<img width="850" height="472" alt="Screenshot 2025-07-30 at 19 27 07" src="https://github.com/user-attachments/assets/ebd36ada-c00d-46dc-8434-11ea96e8e8c4" />
+
+
+### 🧑‍⚕️ Consultation Booking Flow
+
+<img width="487" height="576" alt="Screenshot 2025-07-30 at 19 28 25" src="https://github.com/user-attachments/assets/1f84df6d-c8b2-4949-a04a-b07afa52df17" />
+
 
 ---
 
