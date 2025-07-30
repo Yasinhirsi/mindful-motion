@@ -16,6 +16,16 @@ Unlike typical fitness or mood-tracking apps, Mindful Motion:
 
 ---
 
+
+---
+
+## 🎥 Final Year Presentation
+
+Want a walkthrough of the project and its motivation?
+
+▶️ [Watch the recorded presentation](https://kaf.qmplus.qmul.ac.uk/browseandembed/index/media-redirect/entryid/1_ce898dg9/showDescription/false/showTitle/false/showTags/false/showDuration/false/showOwner/false/showUploadDate/false/playerSize/608x342/playerSkin/55047942/thumbEmbed//autoPlay//startTime//endTime/)
+
+---
 ## 🎯 Key Features
 
 ### 📝 Emotion Check-In (Text-Based NLP)
