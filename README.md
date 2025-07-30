@@ -75,11 +75,10 @@ Unlike typical fitness or mood-tracking apps, Mindful Motion:
 <img width="850" height="396" alt="Screenshot 2025-07-30 at 19 26 58" src="https://github.com/user-attachments/assets/72b16679-42f7-4955-8f71-dbb6c66c51d3" />
 
 ### 👤 Therapist Insights View
-<img width="1026" height="478" alt="Screenshot 2025-07-30 at 19 28 08" src="https://github.com/user-attachments/assets/b1184808-d849-4d12-b380-ea412679d3ce" />
-
+<img width="850" height="472" alt="Screenshot 2025-07-30 at 19 27 07" src="https://github.com/user-attachments/assets/ebd36ada-c00d-46dc-8434-11ea96e8e8c4" />
 
 ### 🏃 Fitness Progress Tracking
-<img width="850" height="472" alt="Screenshot 2025-07-30 at 19 27 07" src="https://github.com/user-attachments/assets/ebd36ada-c00d-46dc-8434-11ea96e8e8c4" />
+<img width="1026" height="478" alt="Screenshot 2025-07-30 at 19 28 08" src="https://github.com/user-attachments/assets/b1184808-d849-4d12-b380-ea412679d3ce" />
 
 
 ### 🧑‍⚕️ Consultation Booking Flow
