@@ -51,7 +51,6 @@ export function AuthForm() {
   const router = useRouter()
   const supabase = getSupabaseClient()
 
-
   useEffect(() => {
     const { data: subscription } = supabase.auth.onAuthStateChange((event: string, session: any) => {
       const isVerified = session?.user?.email_confirmed_at;
@@ -148,6 +147,10 @@ export function AuthForm() {
   async function onSignupSubmit(values: z.infer<typeof signupSchema>) {
     setIsLoading(true)
     try {
+      console.log("Starting signup process...");
+      console.log("Supabase URL:", process.env.NEXT_PUBLIC_SUPABASE_URL);
+      console.log("Supabase Anon Key exists:", !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: values.email,
         password: values.password,
@@ -161,8 +164,15 @@ export function AuthForm() {
         }
       })
 
-      if (authError) throw authError
+      console.log("Auth response:", { authData, authError });
+
+      if (authError) {
+        console.error("Auth error:", authError);
+        throw authError;
+      }
       if (!authData.user) throw new Error("User creation failed")
+
+      console.log("User created successfully, creating profile...");
 
       const { error: profileError } = await supabase.from("users").insert({
         id: authData.user.id,
@@ -172,16 +182,23 @@ export function AuthForm() {
         user_type: values.user_type,
       })
 
-      if (profileError) throw profileError
+      if (profileError) {
+        console.error("Profile creation error:", profileError);
+        throw profileError;
+      }
 
       if (values.user_type === "therapist") {
+        console.log("Creating therapist profile...");
         const { error: therapistError } = await supabase.from("therapist_profiles").insert({
           user_id: authData.user.id,
           age: Number.parseInt((values as any).age),
           qualifications: (values as any).qualifications,
         })
 
-        if (therapistError) throw therapistError
+        if (therapistError) {
+          console.error("Therapist profile creation error:", therapistError);
+          throw therapistError;
+        }
       }
       console.log("✅ Signup successful, showing toast...");
       toast({
@@ -189,6 +206,10 @@ export function AuthForm() {
         description: "Please check your email for confirmation instructions.",
       })
     } catch (error: any) {
+      console.error("Signup error details:", error);
+      console.error("Error message:", error.message);
+      console.error("Error stack:", error.stack);
+
       toast({
         title: "Signup failed",
         description: error.message || "Something went wrong. Please try again.",
