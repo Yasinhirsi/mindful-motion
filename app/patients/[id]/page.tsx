@@ -2,12 +2,19 @@
 
 import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { toast } from "@/components/ui/use-toast"
 import { useParams, useRouter } from "next/navigation"
 import { Line, LineChart, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer } from "recharts"
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 import { getSupabaseClient } from "@/lib/supabase/client"
+import { Calendar, Clock, MapPin, User, MessageSquare, TrendingUp, TrendingDown } from "lucide-react"
+
+// Force dynamic rendering to prevent build-time errors
+export const dynamic = 'force-dynamic'
 
 export default function PatientDetailPage() {
   const [patient, setPatient] = useState<any>(null)

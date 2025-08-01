@@ -39,6 +39,9 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { toast } from "@/components/ui/use-toast";
 
+// Force dynamic rendering to prevent build-time errors
+export const dynamic = 'force-dynamic'
+
 // Define the path to the models (using CDN for simplicity)
 const MODEL_URL = "https://cdn.jsdelivr.net/npm/@vladmandic/face-api/model/";
 
@@ -318,9 +321,8 @@ export default function FacialAnalysisPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
         <Card
-          className={`lg:col-span-7 border border-border/40 shadow-md ${
-            !modelsLoaded ? "opacity-50 pointer-events-none" : ""
-          }`}
+          className={`lg:col-span-7 border border-border/40 shadow-md ${!modelsLoaded ? "opacity-50 pointer-events-none" : ""
+            }`}
         >
           <CardHeader className="py-3 px-4 bg-muted/30 border-b">
             <div className="flex items-center justify-between">
@@ -338,16 +340,16 @@ export default function FacialAnalysisPage() {
                   isAnalyzing
                     ? "destructive"
                     : streamRef.current
-                    ? "secondary"
-                    : "outline"
+                      ? "secondary"
+                      : "outline"
                 }
                 className={cn(isAnalyzing && "animate-pulse")}
               >
                 {isAnalyzing
                   ? "Analyzing..."
                   : streamRef.current
-                  ? "Camera Active"
-                  : "Ready"}
+                    ? "Camera Active"
+                    : "Ready"}
               </Badge>
             </div>
           </CardHeader>
@@ -415,9 +417,8 @@ export default function FacialAnalysisPage() {
         </Card>
 
         <Card
-          className={`lg:col-span-5 border border-border/40 shadow-md ${
-            !modelsLoaded ? "opacity-50" : ""
-          }`}
+          className={`lg:col-span-5 border border-border/40 shadow-md ${!modelsLoaded ? "opacity-50" : ""
+            }`}
         >
           <CardHeader className="py-3 px-4 bg-muted/30 border-b">
             <CardTitle className="text-lg flex items-center gap-2">
@@ -453,35 +454,33 @@ export default function FacialAnalysisPage() {
                   className={cn(
                     "text-center p-4 rounded-md mb-3 border transition-all duration-300 shadow-sm",
                     dominantEmotion
-                      ? `border-${
-                          dominantEmotion === "happy"
-                            ? "emerald"
-                            : dominantEmotion === "sad"
-                            ? "blue"
-                            : dominantEmotion === "angry"
+                      ? `border-${dominantEmotion === "happy"
+                        ? "emerald"
+                        : dominantEmotion === "sad"
+                          ? "blue"
+                          : dominantEmotion === "angry"
                             ? "red"
                             : dominantEmotion === "surprised"
-                            ? "amber"
-                            : dominantEmotion === "fearful"
-                            ? "purple"
-                            : dominantEmotion === "disgusted"
-                            ? "green"
-                            : "gray"
-                        }-500/50 bg-${
-                          dominantEmotion === "happy"
-                            ? "emerald"
-                            : dominantEmotion === "sad"
-                            ? "blue"
-                            : dominantEmotion === "angry"
+                              ? "amber"
+                              : dominantEmotion === "fearful"
+                                ? "purple"
+                                : dominantEmotion === "disgusted"
+                                  ? "green"
+                                  : "gray"
+                      }-500/50 bg-${dominantEmotion === "happy"
+                        ? "emerald"
+                        : dominantEmotion === "sad"
+                          ? "blue"
+                          : dominantEmotion === "angry"
                             ? "red"
                             : dominantEmotion === "surprised"
-                            ? "amber"
-                            : dominantEmotion === "fearful"
-                            ? "purple"
-                            : dominantEmotion === "disgusted"
-                            ? "green"
-                            : "gray"
-                        }-50`
+                              ? "amber"
+                              : dominantEmotion === "fearful"
+                                ? "purple"
+                                : dominantEmotion === "disgusted"
+                                  ? "green"
+                                  : "gray"
+                      }-50`
                       : ""
                   )}
                 >
@@ -542,16 +541,16 @@ export default function FacialAnalysisPage() {
                                 {emotion === "happy"
                                   ? "Feeling of joy and contentment"
                                   : emotion === "sad"
-                                  ? "Feeling of sorrow or unhappiness"
-                                  : emotion === "angry"
-                                  ? "Feeling of strong displeasure"
-                                  : emotion === "surprised"
-                                  ? "Feeling of being taken unaware"
-                                  : emotion === "fearful"
-                                  ? "Feeling of being afraid"
-                                  : emotion === "disgusted"
-                                  ? "Feeling of revulsion"
-                                  : "Lack of strong emotion"}
+                                    ? "Feeling of sorrow or unhappiness"
+                                    : emotion === "angry"
+                                      ? "Feeling of strong displeasure"
+                                      : emotion === "surprised"
+                                        ? "Feeling of being taken unaware"
+                                        : emotion === "fearful"
+                                          ? "Feeling of being afraid"
+                                          : emotion === "disgusted"
+                                            ? "Feeling of revulsion"
+                                            : "Lack of strong emotion"}
                               </p>
                             </div>
                             <div

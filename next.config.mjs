@@ -27,7 +27,15 @@ const nextConfig = {
     webpackBuildWorker: true,
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
+    staticPageGenerationTimeout: 0,
   },
+  // Disable static generation completely
+  trailingSlash: false,
+  generateBuildId: async () => {
+    return 'build-' + Date.now()
+  },
+  // Disable static generation
+  staticPageGenerationTimeout: 0,
 }
 
 if (userConfig) {

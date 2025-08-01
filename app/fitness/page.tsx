@@ -12,6 +12,9 @@ import { toast } from "@/components/ui/use-toast"
 import { Line, LineChart, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer } from "recharts"
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 
+// Force dynamic rendering to prevent build-time errors
+export const dynamic = 'force-dynamic'
+
 export default function FitnessPage() {
   const [activities, setActivities] = useState<any[]>([])
   const [goals, setGoals] = useState<any[]>([])

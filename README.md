@@ -1,117 +1,103 @@
-# 🧠 Mindful Motion
+# Mindful Motion
 
-A full-stack AI wellness platform that combines **text-based NLP sentiment analysis**, **facial emotion detection**, and **fitness goal tracking**, with optional **therapist consultations** — all in one web app.
+A Next.js application for mental health tracking and emotion analysis.
 
----
+## 🚀 Quick Start
 
-## 🗂 Project Overview
+### Prerequisites
+- Node.js 18+
+- Supabase account
 
-**Mindful Motion** was built as my final year project for BSc Computer Science. The goal? To bridge the disconnect between mental and physical health tools by offering a *centralised*, *personalised*, and *emotionally intelligent* platform.
+### Local Development
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Create `.env.local` with your Supabase credentials:
+   ```
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+4. Run the development server: `npm run dev`
 
-Unlike typical fitness or mood-tracking apps, Mindful Motion:
-- Analyses **natural language reflections** to detect emotional tone.
-- Uses **webcam facial recognition** to analyse expressions.
-- Offers **goal setting** and **fitness logging** for self-tracking.
-- Supports **therapist interaction** with mood history insights.
+## 🐳 Docker Deployment
 
----
+### Secure Container Setup
+The Docker image is built **without embedding any credentials**, making it safe to share and deploy.
 
+#### Build the Image
+```bash
+# Build without credentials (they're injected at runtime)
+./build.sh
+```
 
----
+#### Run with Environment Variables
+```bash
+# Method 1: Direct docker run
+docker run -p 3000:3000 \
+  -e NEXT_PUBLIC_SUPABASE_URL=your_supabase_url \
+  -e NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key \
+  mindful-motion
 
-## 🎥 Final Year Presentation
+# Method 2: Using docker-compose
+echo "NEXT_PUBLIC_SUPABASE_URL=your_supabase_url" > .env
+echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key" >> .env
+docker-compose up -d
+```
 
-Want a walkthrough of the project and its motivation?
+### 🔐 Security Features
+- ✅ **No credentials embedded in Docker image**
+- ✅ **Runtime environment injection only**
+- ✅ **Image can be safely shared/distributed**
+- ✅ **Each environment can use different Supabase projects**
 
-▶️ [Watch the recorded presentation](https://youtu.be/w6U-WpCDyts)
+## 🛠️ Tech Stack
 
----
-## 🎯 Key Features
-
-### 📝 Emotion Check-In (Text-Based NLP)
-- Users submit reflections (e.g. “I feel drained but hopeful about tomorrow”).
-- Sentiment is analysed using a hybrid of:
-  - Open-source NLP (sentiment library)
-  - Custom modifiers for **negation**, **intensity**, **idioms** (e.g. “over the moon”).
-- Visual breakdown + personalised suggestions shown instantly.
-
-### 📸 Facial Expression Detection
-- Real-time emotion inference using **face-api.js**.
-- No data leaves the browser (privacy-first).
-- Detects emotions like joy, sadness, anger, surprise with % confidence.
-
-### 🏃‍♂️ Fitness Goal Tracking
-- Set and monitor daily/weekly goals (e.g. 10k steps).
-- Manual activity logging.
-- Visual dashboard for progress.
-
-### 🧑‍⚕️ Therapist Consultations
-- Users can request 1-on-1 support.
-- Therapists view mood trends and session history.
-- Secure scheduling and role-based access.
-
----
-
-## 🧠 Tech Stack
-
-- **Frontend:** Next.js + Tailwind CSS
+- **Frontend:** Next.js 14, React, TypeScript
+- **Styling:** Tailwind CSS, shadcn/ui
 - **Backend:** Supabase (PostgreSQL + Auth)
-- **NLP:** Sentiment.js + custom logic
-- **Facial Analysis:** face-api.js
-- **Auth & DB:** Supabase
-- **Deployment:** Vercel
+- **Deployment:** Docker, Docker Compose
 
----
+## 📁 Project Structure
 
-## 📊 Sample Screenshots
+```
+mindful-motion/
+├── app/                 # Next.js app directory
+├── components/          # React components
+├── lib/                 # Utility functions
+├── hooks/               # Custom React hooks
+├── styles/              # Global styles
+├── public/              # Static assets
+├── supabase/            # Supabase configuration
+└── migrations/          # Database migrations
+```
 
+## 🔧 Development
 
+### Available Scripts
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run test` - Run tests
 
-### 🧭 Dashboard Overview
+### Database Setup
+1. Create a Supabase project
+2. Run the SQL schema in `schema.sql`
+3. Configure environment variables
 
-<img width="793" height="436" alt="Screenshot 2025-07-30 at 19 25 28" src="https://github.com/user-attachments/assets/55814aab-333e-4a45-80e9-2073691ce47d" />
+## 📚 Documentation
 
+- [Deployment Guide](./DEPLOYMENT_GUIDE.md) - Detailed deployment instructions
+- [API Documentation](./API.md) - API endpoints and usage
 
-### 📝 Daily Check-In (Form)
-<img width="804" height="351" alt="Screenshot 2025-07-30 at 19 25 46" src="https://github.com/user-attachments/assets/ea58d043-8017-4fb4-a156-18873d982c1e" />
+## 🤝 Contributing
 
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
 
-### 📈 Emotion Analysis Result
-<img width="809" height="413" alt="Screenshot 2025-07-30 at 19 26 07" src="https://github.com/user-attachments/assets/4d954d8c-d1e4-461f-81a7-55eebe2b7bf0" />
+## 📄 License
 
-
-### 😐 Facial Expression Detection
-
-<img width="850" height="396" alt="Screenshot 2025-07-30 at 19 26 58" src="https://github.com/user-attachments/assets/72b16679-42f7-4955-8f71-dbb6c66c51d3" />
-
-### 👤 Therapist Insights View
-<img width="850" height="472" alt="Screenshot 2025-07-30 at 19 27 07" src="https://github.com/user-attachments/assets/ebd36ada-c00d-46dc-8434-11ea96e8e8c4" />
-
-### 🏃 Fitness Progress Tracking
-<img width="1026" height="478" alt="Screenshot 2025-07-30 at 19 28 08" src="https://github.com/user-attachments/assets/b1184808-d849-4d12-b380-ea412679d3ce" />
-
-
-### 🧑‍⚕️ Consultation Booking Flow
-
-<img width="487" height="576" alt="Screenshot 2025-07-30 at 19 28 25" src="https://github.com/user-attachments/assets/1f84df6d-c8b2-4949-a04a-b07afa52df17" />
-
-
----
-
-## 💡 Why This Project Matters
-
-Modern wellness apps often feel disconnected — mental health tools exist in silos from physical ones. **Mindful Motion** takes a different approach:  
-> 📍 A holistic wellness ecosystem that adapts to how you feel — not just what you do.
-
-This project was developed with a real-world problem in mind, backed by user research, modular architecture, and ethical considerations.
-
----
-
-## 🔮 Future Features (Post-Graduation Goals)
-- Mobile app (React Native) + push notifications  
-- Audio journaling support  
-- Integration with Apple Health / Fitbit  
-- Gamification (badges, streaks, wellness challenges)  
-- Deeper NLP with Transformer models (e.g. BERT)  
+This project is licensed under the MIT License.
 
 

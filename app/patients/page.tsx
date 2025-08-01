@@ -7,6 +7,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { getSupabaseClient } from "@/lib/supabase/client"
 import { toast } from "@/components/ui/use-toast"
 import { useRouter } from "next/navigation"
+import { Badge } from "@/components/ui/badge"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
+// Force dynamic rendering to prevent build-time errors
+export const dynamic = 'force-dynamic'
 
 export default function PatientsPage() {
   const [patients, setPatients] = useState<any[]>([])

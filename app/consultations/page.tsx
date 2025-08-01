@@ -12,6 +12,9 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { format, addDays, parseISO, startOfDay, isBefore } from "date-fns"
 
+// Force dynamic rendering to prevent build-time errors
+export const dynamic = 'force-dynamic'
+
 // Define types for better type safety
 type User = {
   id: string

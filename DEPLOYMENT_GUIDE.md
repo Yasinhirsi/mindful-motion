@@ -6,7 +6,7 @@ This guide explains how to deploy the Mindful Motion application on different pl
 
 ### Local Development
 ```bash
-# Build the image
+# Build the secure image (no credentials embedded)
 docker build -t mindful-motion .
 
 # Run with environment variables
@@ -18,13 +18,19 @@ docker run -p 3000:3000 \
 
 ### Using Docker Compose
 ```bash
-# Create .env file with your credentials
+# Create .env file with your credentials (NOT .env.local)
 echo "NEXT_PUBLIC_SUPABASE_URL=your_supabase_url" > .env
 echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_key" >> .env
 
 # Run with docker-compose
 docker-compose up -d
 ```
+
+### 🔐 Security Features
+- ✅ **No credentials embedded in Docker image**
+- ✅ **Runtime environment injection only**
+- ✅ **Image can be safely shared/distributed**
+- ✅ **Each environment can use different Supabase projects**
 
 ## ☁️ Cloud Deployment Options
 
@@ -101,8 +107,8 @@ heroku config:set NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_key
 ## 🚀 Production Checklist
 
 - [ ] Set up Supabase project
-- [ ] Configure environment variables
-- [ ] Build Docker image
+- [ ] Configure environment variables at runtime
+- [ ] Build Docker image (no credentials needed)
 - [ ] Deploy to chosen platform
 - [ ] Set up custom domain (optional)
 - [ ] Configure SSL/TLS
@@ -114,7 +120,7 @@ heroku config:set NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_key
 ### Common Issues
 
 1. **Supabase Connection Errors**
-   - Verify environment variables are set correctly
+   - Verify environment variables are set correctly at runtime
    - Check Supabase project is active
    - Ensure CORS settings allow your domain
 
@@ -134,9 +140,10 @@ heroku config:set NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_key
 curl -I http://your-domain:3000
 ```
 
-## 📝 Notes
+## 📝 Security Notes
 
-- The Docker image is built with placeholder environment variables
-- Real environment variables are injected at runtime
-- This makes the image portable across different environments
-- Always use environment variables for sensitive data, never hardcode 
+- ✅ The Docker image is built WITHOUT any credentials
+- ✅ Environment variables are injected at runtime only
+- ✅ This makes the image portable and secure across different environments
+- ✅ You can safely share the Docker image without exposing your Supabase credentials
+- ✅ Each deployment can use different Supabase projects by changing environment variables 

@@ -10,6 +10,9 @@ import { getSupabaseClient } from "@/lib/supabase/client"
 import { toast } from "@/components/ui/use-toast"
 import { format } from "date-fns"
 
+// Force dynamic rendering to prevent build-time errors
+export const dynamic = 'force-dynamic'
+
 // Define types for better type safety
 type Availability = {
   id: string

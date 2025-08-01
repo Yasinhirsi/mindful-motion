@@ -1,15 +1,12 @@
 #!/bin/bash
 
 # Build script for Mindful Motion Docker image
-# This script builds the image with your real Supabase credentials
+# This script builds the image with your Supabase credentials from .env.local
 
-echo "🚀 Building Mindful Motion Docker image with your Supabase credentials..."
+echo "🚀 Building Mindful Motion Docker image..."
 
-# Source the environment variables from .env.local
-if [ -f .env.local ]; then
-    source .env.local
-    echo "✅ Loaded environment variables from .env.local"
-else
+# Check if .env.local exists
+if [ ! -f .env.local ]; then
     echo "❌ Error: .env.local file not found!"
     echo "Please create .env.local with your Supabase credentials:"
     echo "NEXT_PUBLIC_SUPABASE_URL=your_supabase_url"
@@ -17,19 +14,9 @@ else
     exit 1
 fi
 
-# Check if environment variables are set
-if [ -z "$NEXT_PUBLIC_SUPABASE_URL" ] || [ -z "$NEXT_PUBLIC_SUPABASE_ANON_KEY" ]; then
-    echo "❌ Error: Missing Supabase environment variables!"
-    echo "Please check your .env.local file"
-    exit 1
-fi
-
-# Build the Docker image with your credentials
+# Build the Docker image
 echo "🔨 Building Docker image..."
-docker build \
-    --build-arg NEXT_PUBLIC_SUPABASE_URL="$NEXT_PUBLIC_SUPABASE_URL" \
-    --build-arg NEXT_PUBLIC_SUPABASE_ANON_KEY="$NEXT_PUBLIC_SUPABASE_ANON_KEY" \
-    -t mindful-motion .
+docker build -t mindful-motion .
 
 if [ $? -eq 0 ]; then
     echo "✅ Docker image built successfully!"

@@ -3,6 +3,9 @@
 import { useEffect, useState } from 'react'
 import { getSupabaseClient } from '@/lib/supabase/client'
 
+// Force dynamic rendering to prevent build-time errors
+export const dynamic = 'force-dynamic'
+
 export default function TestPage() {
     const [status, setStatus] = useState('Testing...')
     const [error, setError] = useState<string | null>(null)

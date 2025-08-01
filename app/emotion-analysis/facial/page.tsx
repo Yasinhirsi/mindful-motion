@@ -14,6 +14,9 @@ import { Progress } from "@/components/ui/progress";
 import { useRouter } from "next/navigation";
 import { getSupabaseClient } from "@/lib/supabase/client";
 
+// Force dynamic rendering to prevent build-time errors
+export const dynamic = 'force-dynamic'
+
 export default function FacialAnalysisPage() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [emotions, setEmotions] = useState<Record<string, number> | null>(null);

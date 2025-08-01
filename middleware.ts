@@ -5,10 +5,19 @@ import type { NextRequest } from 'next/server'
 export async function middleware(req: NextRequest) {
     const res = NextResponse.next()
 
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    // During build time, environment variables might not be available
+    if (!supabaseUrl || !supabaseAnonKey) {
+        console.warn("Missing Supabase environment variables during build time");
+        return res;
+    }
+
     // Create a Supabase client configured to use cookies
     const supabase = createServerClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+        supabaseUrl,
+        supabaseAnonKey,
         {
             cookies: {
                 get(name: string) {
@@ -49,25 +58,13 @@ export async function middleware(req: NextRequest) {
     } = await supabase.auth.getSession()
 
     // If no session and user is trying to access protected routes, redirect to home
-    const isProtectedRoute = req.nextUrl.pathname.startsWith('/dashboard') ||
-        req.nextUrl.pathname.startsWith('/consultations') ||
-        req.nextUrl.pathname.startsWith('/patients') ||
-        req.nextUrl.pathname.startsWith('/fitness') ||
-        req.nextUrl.pathname.startsWith('/emotion-analysis') ||
-        req.nextUrl.pathname.startsWith('/daily-checkin') ||
-        req.nextUrl.pathname.startsWith('/availability') ||
-        req.nextUrl.pathname.startsWith('/profile') ||
-        req.nextUrl.pathname.startsWith('/settings')
+    if (!session) {
+        const protectedRoutes = ['/fitness', '/emotion-analysis', '/daily-checkin', '/consultations', '/patients', '/availability']
+        const isProtectedRoute = protectedRoutes.some(route => req.nextUrl.pathname.startsWith(route))
 
-    if (!session && isProtectedRoute) {
-        return NextResponse.redirect(new URL('/', req.url))
-    }
-
-    // If session exists and user is trying to access auth pages, redirect to dashboard
-    const isAuthRoute = req.nextUrl.pathname === '/' && req.nextUrl.search === ''
-
-    if (session && isAuthRoute) {
-        return NextResponse.redirect(new URL('/dashboard', req.url))
+        if (isProtectedRoute) {
+            return NextResponse.redirect(new URL('/', req.url))
+        }
     }
 
     return res
@@ -75,6 +72,13 @@ export async function middleware(req: NextRequest) {
 
 export const config = {
     matcher: [
-        '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+        /*
+         * Match all request paths except for the ones starting with:
+         * - api (API routes)
+         * - _next/static (static files)
+         * - _next/image (image optimization files)
+         * - favicon.ico (favicon file)
+         */
+        '/((?!api|_next/static|_next/image|favicon.ico).*)',
     ],
 } 

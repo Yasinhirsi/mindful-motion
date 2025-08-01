@@ -5,6 +5,10 @@ import { getSupabaseClient } from "@/lib/supabase/client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
+import { useSearchParams } from "next/navigation";
+
+// Force dynamic rendering to prevent build-time errors
+export const dynamic = 'force-dynamic'
 
 export default function ResetPasswordPage() {
     const [password, setPassword] = useState("");

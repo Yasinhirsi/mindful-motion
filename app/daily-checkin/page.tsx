@@ -16,6 +16,9 @@ import { getSupabaseClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+// Force dynamic rendering to prevent build-time errors
+export const dynamic = 'force-dynamic'
+
 let Sentiment: any;
 
 const NEGATION_WORDS = [
@@ -513,8 +516,8 @@ export default function DailyCheckinPage() {
       return sentimentScore > 0.5
         ? "You seem to be in a positive mood."
         : sentimentScore < -0.5
-        ? "You seem to be in a negative mood."
-        : "Your mood appears to be neutral.";
+          ? "You seem to be in a negative mood."
+          : "Your mood appears to be neutral.";
     }
 
     const topEmotion = sortedEmotions[0];
@@ -528,9 +531,8 @@ export default function DailyCheckinPage() {
     let summary = `You seem to be feeling ${intensityDesc}${topEmotion[0]}`;
 
     if (secondEmotion && secondEmotion[1] > 30) {
-      summary += ` and ${secondEmotion[1] > 50 ? "quite " : "somewhat "}${
-        secondEmotion[0]
-      }`;
+      summary += ` and ${secondEmotion[1] > 50 ? "quite " : "somewhat "}${secondEmotion[0]
+        }`;
     }
 
     if (
@@ -916,8 +918,8 @@ export default function DailyCheckinPage() {
                         {sentimentScore > 0
                           ? "Positive"
                           : sentimentScore < 0
-                          ? "Negative"
-                          : "Neutral"}
+                            ? "Negative"
+                            : "Neutral"}
                       </span>
                       <span className="text-sm text-muted-foreground">
                         {sentimentScore.toFixed(2)}
@@ -925,13 +927,12 @@ export default function DailyCheckinPage() {
                     </div>
                     <Progress
                       value={50 + sentimentScore * 10}
-                      className={`mt-1 ${
-                        sentimentScore > 0
+                      className={`mt-1 ${sentimentScore > 0
                           ? "bg-green-100"
                           : sentimentScore < 0
-                          ? "bg-red-100"
-                          : ""
-                      }`}
+                            ? "bg-red-100"
+                            : ""
+                        }`}
                     />
                   </div>
                 )}
@@ -951,23 +952,22 @@ export default function DailyCheckinPage() {
                       </div>
                       <Progress
                         value={value}
-                        className={`${
-                          value > 50
+                        className={`${value > 50
                             ? emotion === "joy"
                               ? "bg-green-100"
                               : emotion === "sadness"
-                              ? "bg-blue-100"
-                              : emotion === "anger"
-                              ? "bg-red-100"
-                              : emotion === "fear" || emotion === "anxiety"
-                              ? "bg-purple-100"
-                              : emotion === "surprise"
-                              ? "bg-yellow-100"
-                              : emotion === "disgust"
-                              ? "bg-green-200"
-                              : ""
+                                ? "bg-blue-100"
+                                : emotion === "anger"
+                                  ? "bg-red-100"
+                                  : emotion === "fear" || emotion === "anxiety"
+                                    ? "bg-purple-100"
+                                    : emotion === "surprise"
+                                      ? "bg-yellow-100"
+                                      : emotion === "disgust"
+                                        ? "bg-green-200"
+                                        : ""
                             : ""
-                        }`}
+                          }`}
                       />
                     </div>
                   ))}
